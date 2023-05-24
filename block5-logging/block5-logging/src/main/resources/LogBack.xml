@@ -1,0 +1,21 @@
+<configuration>
+<!-- Configuración para escribir los logs de nivel ERROR en un fichero -->
+<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>logs/error.log</file>
+    <encoder>
+        <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+</appender>
+<logger name="com.example" level="error" additivity="false">
+    <appender-ref ref="FILE"/>
+</logger>
+
+<!--> Configuración para imprimir los logs de nivel WARNING o inferiores en la consola -->
+
+<appender name="console" class="org.apache.log4j.ConsoleAppender">
+    <param name="Threshold" value="warn"/>
+    <layout class="org.apache.log4j.PatternLayout">
+        <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+    </layout>
+</appender>
+</configuration>
