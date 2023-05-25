@@ -1,4 +1,4 @@
-package com.example.Ejercicio7_Validacion;
+package com.example.Ejercicio7_Validacion.POJOs;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -10,21 +10,20 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "estudiante")
-public class Student {
+@Table(name = "profesor")
+public class Profesor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id_string;
+    @Column(name = "id_profesor")
+    Integer id_profesor;
     @OneToOne
-    @JoinColumn(name = "id_persona")
+    @JoinColumn(name="persona_id")
     Persona persona;
-    @NotNull
-    int num_hours_week;
-    @OneToOne
-    @JoinColumn(name="id_profesor")
-    Profesor profesor;
     @NotNull
     String branch;
 
+    public Profesor(int id_profesor) {
+        this.id_profesor = id_profesor;
+    }
 }

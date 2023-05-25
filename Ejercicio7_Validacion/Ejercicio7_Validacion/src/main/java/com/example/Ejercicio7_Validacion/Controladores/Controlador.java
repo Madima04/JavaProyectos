@@ -1,5 +1,9 @@
-package com.example.Ejercicio7_Validacion;
+package com.example.Ejercicio7_Validacion.Controladores;
 
+import com.example.Ejercicio7_Validacion.Excepciones.EntityNotFoundException;
+import com.example.Ejercicio7_Validacion.POJOs.Persona;
+import com.example.Ejercicio7_Validacion.Repositorio.PersonaRepository;
+import com.example.Ejercicio7_Validacion.Excepciones.UnprocessableEntityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

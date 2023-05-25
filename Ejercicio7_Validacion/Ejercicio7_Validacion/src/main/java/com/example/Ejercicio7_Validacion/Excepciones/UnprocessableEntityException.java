@@ -1,4 +1,4 @@
-package com.example.Ejercicio7_Validacion;
+package com.example.Ejercicio7_Validacion.Excepciones;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

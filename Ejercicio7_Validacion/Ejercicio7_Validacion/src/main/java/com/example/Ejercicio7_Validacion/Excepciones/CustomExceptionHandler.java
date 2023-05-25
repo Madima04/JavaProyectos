@@ -1,5 +1,8 @@
-package com.example.Ejercicio7_Validacion;
+package com.example.Ejercicio7_Validacion.Excepciones;
 
+import com.example.Ejercicio7_Validacion.Excepciones.CustomError;
+import com.example.Ejercicio7_Validacion.Excepciones.EntityNotFoundException;
+import com.example.Ejercicio7_Validacion.Excepciones.UnprocessableEntityException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

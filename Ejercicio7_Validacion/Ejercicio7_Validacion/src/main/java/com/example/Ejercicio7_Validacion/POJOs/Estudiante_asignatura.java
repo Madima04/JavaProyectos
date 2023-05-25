@@ -1,4 +1,4 @@
-package com.example.Ejercicio7_Validacion;
+package com.example.Ejercicio7_Validacion.POJOs;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
