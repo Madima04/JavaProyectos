@@ -1,7 +1,10 @@
 package com.example.Ejercicio7_Validacion.Controladores;
 
 import com.example.Ejercicio7_Validacion.Excepciones.EntityNotFoundException;
+import com.example.Ejercicio7_Validacion.POJOs.Input.PersonaImput;
+import com.example.Ejercicio7_Validacion.POJOs.Output.PersonaOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Persona;
+import com.example.Ejercicio7_Validacion.POJOs.Servicios.InterfaceServicioEstudiante;
 import com.example.Ejercicio7_Validacion.Repositorio.PersonaRepository;
 import com.example.Ejercicio7_Validacion.Excepciones.UnprocessableEntityException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class ControladorPersona {
+
+    @Autowired
+    InterfaceServicioEstudiante interfaceServicioEstudiante;
 
     @Autowired
     private PersonaRepository repository;
@@ -83,6 +89,12 @@ public class ControladorPersona {
     @ResponseBody
     public List<Persona> listPersonas() {
         return repository.findAll();
+    }
+
+    @PostMapping("/addPersona")
+    @ResponseBody
+    public PersonaOutput addPersona(@RequestBody PersonaImput persona){
+        return interfaceServicioEstudiante.addPersonaService(persona);
     }
 
 }
