@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
@@ -29,6 +30,7 @@ public class Estudiante_asignatura {
     @Column(name = "id_asignatura")
     Integer id_asignatura;
     @ManyToMany
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     Set<Student> estudiantes;
     String asignatura;
     @NotNull
@@ -62,4 +64,5 @@ public class Estudiante_asignatura {
         estudiante_asignaturaOutput.setFinish_date(estudiante_asignatura.getFinish_date());
         return estudiante_asignaturaOutput;
     }
+
 }

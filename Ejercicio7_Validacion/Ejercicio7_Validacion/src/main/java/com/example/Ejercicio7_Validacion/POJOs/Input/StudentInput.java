@@ -3,6 +3,8 @@ package com.example.Ejercicio7_Validacion.POJOs.Input;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 
 @Data
 @NoArgsConstructor
@@ -13,5 +15,6 @@ public class StudentInput {
     int num_hours_week;
     int id_profesor;
     String branch;
+    Set<Integer> id_asingatura;
 
 }

@@ -6,6 +6,7 @@ import com.example.Ejercicio7_Validacion.POJOs.Output.PersonaOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.StudentOutputSimple;
 import com.example.Ejercicio7_Validacion.POJOs.Persona;
 import com.example.Ejercicio7_Validacion.POJOs.Student;
+import com.example.Ejercicio7_Validacion.Repositorio.Estudiante_asignaturaRepository;
 import com.example.Ejercicio7_Validacion.Repositorio.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,8 @@ public class EstudianteService implements InterfaceServicioEstudiante{
     PersonaRepository personaRepository;
     @Autowired
     StudentRepository studentRepository;
+    @Autowired
+    Estudiante_asignaturaRepository estudiante_asignaturaRepository;
 
     public PersonaOutput addPersonaService(PersonaImput persona){
         Persona p = new Persona(persona);
@@ -30,7 +33,7 @@ public class EstudianteService implements InterfaceServicioEstudiante{
     }
 
     public StudentOutputSimple addStudentService( StudentInput student){
-        Student studentGuardado = new Student(student, personaRepository);
+        Student studentGuardado = new Student(student, personaRepository, estudiante_asignaturaRepository);
         studentRepository.save(studentGuardado);
         return studentGuardado.toStudentOutputSimple(studentGuardado);
     }

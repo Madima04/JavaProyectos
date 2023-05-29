@@ -5,6 +5,8 @@ import com.example.Ejercicio7_Validacion.POJOs.Profesor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
 public class StudentOutputFull {
@@ -13,5 +15,6 @@ public class StudentOutputFull {
     int num_hours_week;
     ProfesorOutput profesor;
     String branch;
+    Set<Estudiante_asignaturaOutput> estudios;
 
 }
