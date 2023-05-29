@@ -62,6 +62,7 @@ public class Persona {
 
     public PersonaOutput parsePersonaOutputDTO(Persona persona) {
         PersonaOutput poDTO = new PersonaOutput();
+        poDTO.setId(persona.getId());
         poDTO.setUsuario(persona.getUsuario());
         poDTO.setName(persona.getName());
         poDTO.setSurname(persona.getSurname());

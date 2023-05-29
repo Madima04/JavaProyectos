@@ -3,12 +3,15 @@ package com.example.Ejercicio7_Validacion.POJOs.Output;
 import com.example.Ejercicio7_Validacion.POJOs.Persona;
 import com.example.Ejercicio7_Validacion.POJOs.Profesor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class StudentOutputFull {
     Integer id_string;
-    Persona persona;
+    PersonaOutput persona;
     int num_hours_week;
-    Profesor profesor;
+    ProfesorOutput profesor;
     String branch;
+
 }

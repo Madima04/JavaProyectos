@@ -1,6 +1,7 @@
 package com.example.Ejercicio7_Validacion.POJOs;
 
 import com.example.Ejercicio7_Validacion.POJOs.Input.StudentInput;
+import com.example.Ejercicio7_Validacion.POJOs.Output.StudentOutputFull;
 import com.example.Ejercicio7_Validacion.POJOs.Output.StudentOutputSimple;
 import com.example.Ejercicio7_Validacion.Repositorio.PersonaRepository;
 import jakarta.persistence.*;
@@ -40,8 +41,18 @@ public class Student {
         StudentOutputSimple studentOutputSimple = new StudentOutputSimple();
         studentOutputSimple.setId_string(student.getId_string());
         studentOutputSimple.setBranch(student.getBranch());
-        studentOutputSimple.setPersona(this.persona);
+        studentOutputSimple.setPersona(this.persona.parsePersonaOutputDTO(this.persona));
         return studentOutputSimple;
+    }
+
+
+    public StudentOutputFull toStudentOutputFull(Student student) {
+        StudentOutputFull studentOutputFull = new StudentOutputFull();
+        studentOutputFull.setId_string(student.getId_string());
+        studentOutputFull.setBranch(student.getBranch());
+        studentOutputFull.setNum_hours_week(student.getNum_hours_week());
+        studentOutputFull.setPersona(this.persona.parsePersonaOutputDTO(this.persona));
+        return studentOutputFull;
     }
 
 }

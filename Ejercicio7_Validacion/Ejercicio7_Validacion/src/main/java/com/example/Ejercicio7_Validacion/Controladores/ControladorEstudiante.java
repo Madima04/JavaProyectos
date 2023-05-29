@@ -1,18 +1,9 @@
 package com.example.Ejercicio7_Validacion.Controladores;
 
-import com.example.Ejercicio7_Validacion.POJOs.Input.PersonaImput;
-import com.example.Ejercicio7_Validacion.POJOs.Input.StudentInput;
-import com.example.Ejercicio7_Validacion.POJOs.Output.PersonaOutput;
-import com.example.Ejercicio7_Validacion.POJOs.Output.StudentOutputFull;
-import com.example.Ejercicio7_Validacion.POJOs.Output.StudentOutputSimple;
-import com.example.Ejercicio7_Validacion.POJOs.Persona;
-import com.example.Ejercicio7_Validacion.POJOs.Profesor;
-import com.example.Ejercicio7_Validacion.POJOs.Student;
-import com.example.Ejercicio7_Validacion.Excepciones.EntityNotFoundException;
-import com.example.Ejercicio7_Validacion.Repositorio.Estudiante_asignaturaRepository;
-import com.example.Ejercicio7_Validacion.Repositorio.PersonaRepository;
-import com.example.Ejercicio7_Validacion.Repositorio.ProfesorRepository;
-import com.example.Ejercicio7_Validacion.Repositorio.StudentRepository;
+import com.example.Ejercicio7_Validacion.POJOs.*;
+import com.example.Ejercicio7_Validacion.POJOs.Output.*;
+import com.example.Ejercicio7_Validacion.POJOs.Input.*;
+import com.example.Ejercicio7_Validacion.Repositorio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/escuela")
-public class Controlador1 {
+public class ControladorEstudiante {
 
 
     @Autowired
@@ -49,13 +40,32 @@ public class Controlador1 {
          return studentGuardado.toStudentOutputSimple(studentGuardado);
     }
 
+    @GetMapping("/findStudent/{id}")
+    public Object getId(@PathVariable Integer id, @RequestParam(value = "type", defaultValue = "simple") String type) {
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            if (type.equals("simple")) {
+                return student.toStudentOutputSimple(student);
+            } else if (type.equals("full")) {
+                return student.toStudentOutputFull(student);
+            } else {
+                return ResponseEntity.badRequest().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PutMapping("/updateStudent/{id}")
-    public Object setStudent(@PathVariable Integer id){
+    public Object setStudent(@PathVariable Integer id, @RequestBody StudentInput studentInput){
         Optional<Student> studentOptional = studentRepository.findById(id);
         if(studentOptional.isPresent()){
             Student student = studentOptional.get();
-            student.setNum_hours_week(student.getNum_hours_week());
-            student.setBranch(student.getBranch());
+            student.setBranch(studentInput.getBranch());
+            student.setNum_hours_week(studentInput.getNum_hours_week());
+            student.setPersona(personaRepository.findById(studentInput.getId_persona()).get());
+            studentRepository.save(student);
             return ResponseEntity.ok(student);
         }else{
             return ResponseEntity.notFound().build();

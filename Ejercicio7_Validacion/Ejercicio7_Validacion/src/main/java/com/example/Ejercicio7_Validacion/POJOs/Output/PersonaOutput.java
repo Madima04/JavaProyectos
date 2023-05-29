@@ -1,11 +1,14 @@
 package com.example.Ejercicio7_Validacion.POJOs.Output;
 
+import com.example.Ejercicio7_Validacion.POJOs.Persona;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class PersonaOutput {
 
     Integer id;
