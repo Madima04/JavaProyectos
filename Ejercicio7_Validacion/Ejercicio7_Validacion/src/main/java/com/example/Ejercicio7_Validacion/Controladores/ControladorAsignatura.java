@@ -5,10 +5,7 @@ import com.example.Ejercicio7_Validacion.POJOs.Input.Estudiante_asignaturaInput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.Estudiante_asignaturaOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Servicios.InterfaceServicioAsignatura;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +20,10 @@ public class ControladorAsignatura {
     @PostMapping("/addAsignatura")
     public Estudiante_asignaturaOutput addAsignatura(@RequestBody Estudiante_asignaturaInput estudiante_asignaturaInput){
         return interfaceServicioAsignatura.addAsignaturaService(estudiante_asignaturaInput);
+    }
+    @GetMapping("/findAsignatura/{id}")
+    public Estudiante_asignaturaOutput getAsignatura(@PathVariable Integer id){
+        return interfaceServicioAsignatura.getAsignaturaService(id);
     }
 
 }

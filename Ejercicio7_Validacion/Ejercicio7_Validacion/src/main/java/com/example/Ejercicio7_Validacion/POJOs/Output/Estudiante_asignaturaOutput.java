@@ -10,7 +10,7 @@ import java.util.Set;
 public class Estudiante_asignaturaOutput {
 
     Integer id_asignatura;
-    Set<StudentOutputSimple> estudiantes;
+    Set<StudentOutputFull> estudiantes;
     String asignatura;
     Date initial_date;
     Date finish_date;

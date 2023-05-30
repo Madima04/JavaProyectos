@@ -2,21 +2,16 @@ package com.example.Ejercicio7_Validacion.POJOs;
 
 import com.example.Ejercicio7_Validacion.POJOs.Input.Estudiante_asignaturaInput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.Estudiante_asignaturaOutput;
-import com.example.Ejercicio7_Validacion.POJOs.Output.StudentOutputSimple;
-import com.example.Ejercicio7_Validacion.Repositorio.StudentRepository;
+import com.example.Ejercicio7_Validacion.POJOs.Output.StudentOutputFull;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Data
@@ -33,24 +28,27 @@ public class Estudiante_asignatura {
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     Set<Student> estudiantes;
     String asignatura;
-    @NotNull
     Date initial_date;
     Date finish_date;
 
     public Estudiante_asignatura(Estudiante_asignaturaInput estudiante_asignaturaInputDTO) {
-        estudiantes = new HashSet<>();
+        //estudiantes = new HashSet<>();
         this.id_asignatura = estudiante_asignaturaInputDTO.getId_asignatura();
-
         this.asignatura = estudiante_asignaturaInputDTO.getAsignatura();
         this.initial_date = estudiante_asignaturaInputDTO.getInitial_date();
         this.finish_date = estudiante_asignaturaInputDTO.getFinish_date();
     }
 
 
-    private Set<StudentOutputSimple> transformadorOutput(Set<Student> estudiantes) {
-        Set<StudentOutputSimple> estudiantesOutput = new HashSet<>();
+    private Set<StudentOutputFull> transformadorOutput(Set<Student> estudiantes) {
+        Set<StudentOutputFull> estudiantesOutput = new HashSet<>();
+        StudentOutputFull studentOutputFull;
         for (Student student : estudiantes) {
-            estudiantesOutput.add(student.toStudentOutputSimple(student));
+            studentOutputFull = new StudentOutputFull();
+            studentOutputFull.setId_string(student.getId_Student());
+            studentOutputFull.setBranch(student.getBranch());
+            studentOutputFull.setNum_hours_week(student.getNum_hours_week());
+            estudiantesOutput.add(studentOutputFull);
         }
         return estudiantesOutput;
     }
@@ -65,4 +63,11 @@ public class Estudiante_asignatura {
         return estudiante_asignaturaOutput;
     }
 
+    public Set<Integer> getEstudiantesId(Integer id) {
+        Set<Integer> estudiantesId = new HashSet<>();
+        for (Student student : estudiantes) {
+            estudiantesId.add(student.getId());
+        }
+        return estudiantesId;
+    }
 }

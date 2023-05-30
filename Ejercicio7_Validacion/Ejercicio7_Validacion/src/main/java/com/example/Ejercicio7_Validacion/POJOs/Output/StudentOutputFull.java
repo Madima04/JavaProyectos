@@ -1,7 +1,6 @@
 package com.example.Ejercicio7_Validacion.POJOs.Output;
 
-import com.example.Ejercicio7_Validacion.POJOs.Persona;
-import com.example.Ejercicio7_Validacion.POJOs.Profesor;
+import com.example.Ejercicio7_Validacion.POJOs.Student;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,5 +15,4 @@ public class StudentOutputFull {
     ProfesorOutput profesor;
     String branch;
     Set<Estudiante_asignaturaOutput> estudios;
-
 }
