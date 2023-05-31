@@ -18,7 +18,7 @@ public class ControladorEstudiante {
 
     @PostMapping("/addStudent")
     @ResponseBody
-    public StudentOutputSimple addStudent(@RequestBody StudentInput student){
+    public StudentOutputSimple addStudent(@RequestBody StudentInput student) throws Exception {
         return interfaceServicioEstudiante.addStudentService(student);
     }
 

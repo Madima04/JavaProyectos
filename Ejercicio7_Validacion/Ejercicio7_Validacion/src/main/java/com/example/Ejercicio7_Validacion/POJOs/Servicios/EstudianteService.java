@@ -6,6 +6,7 @@ import com.example.Ejercicio7_Validacion.POJOs.Input.StudentInput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.PersonaOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.StudentOutputSimple;
 import com.example.Ejercicio7_Validacion.POJOs.Persona;
+import com.example.Ejercicio7_Validacion.POJOs.Profesor;
 import com.example.Ejercicio7_Validacion.POJOs.Student;
 import com.example.Ejercicio7_Validacion.Repositorio.Estudiante_asignaturaRepository;
 import com.example.Ejercicio7_Validacion.Repositorio.ProfesorRepository;
@@ -38,10 +39,25 @@ public class EstudianteService implements InterfaceServicioEstudiante{
         return p.parsePersonaOutputDTO(p);
     }
 
-    public StudentOutputSimple addStudentService( StudentInput student){
+    public StudentOutputSimple addStudentService( StudentInput student) throws Exception {
+        if(PersonaIsStudentOrProfesor(student.getId_persona())){
+            throw new Exception("La persona ya es un estudiante o profesor");
+        }
         Student studentGuardado = new Student(student, personaRepository, estudiante_asignaturaRepository);
         studentRepository.save(studentGuardado);
         return studentGuardado.toStudentOutputSimple(studentGuardado);
+    }
+
+    private boolean PersonaIsStudentOrProfesor(int idPersona) {
+        Optional<Persona> personaOptional = personaRepository.findById(idPersona);
+        Optional<Student> studentOptional = studentRepository.findById(idPersona);
+        Optional<Profesor> profesorOptional = profesorRepository.findById(idPersona);
+        if(personaOptional.isPresent()){
+            if(studentOptional.isPresent() || profesorOptional.isPresent()){
+                return true;
+            }
+        }
+        return false;
     }
 
     public Object getIdService(Integer id, String type) {

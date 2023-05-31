@@ -75,4 +75,5 @@ public class Persona {
         poDTO.setTermination_date(persona.getTermination_date());
         return poDTO;
     }
+
 }

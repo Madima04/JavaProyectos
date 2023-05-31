@@ -10,7 +10,7 @@ import java.util.Set;
 
 public interface InterfaceServicioEstudiante {
     public PersonaOutput addPersonaService(PersonaImput persona);
-    public StudentOutputSimple addStudentService(StudentInput student);
+    public StudentOutputSimple addStudentService(StudentInput student) throws Exception;
     public Object getIdService(Integer id, String type);
     public Object setStudentService(Integer id, StudentInput studentInput);
     public Object deleteStudent(@PathVariable Integer id);

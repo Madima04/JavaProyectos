@@ -10,6 +10,7 @@ import com.example.Ejercicio7_Validacion.Excepciones.UnprocessableEntityExceptio
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,9 +21,10 @@ public class ControladorPersona {
 
     @Autowired
     InterfaceServicioEstudiante interfaceServicioEstudiante;
-
     @Autowired
-    private PersonaRepository repository;
+    PersonaRepository repository;
+    @Autowired
+    RestTemplate restTemplate;
     @PostMapping("/persona")
     public Persona getPersona(@RequestBody Persona persona) throws Exception {
         Optional<Persona> personaOptional = Optional.ofNullable(persona);
@@ -96,5 +98,6 @@ public class ControladorPersona {
     public PersonaOutput addPersona(@RequestBody PersonaImput persona){
         return interfaceServicioEstudiante.addPersonaService(persona);
     }
+
 
 }
