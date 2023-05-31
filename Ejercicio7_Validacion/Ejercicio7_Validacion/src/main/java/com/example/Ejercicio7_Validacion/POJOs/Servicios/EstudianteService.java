@@ -8,6 +8,7 @@ import com.example.Ejercicio7_Validacion.POJOs.Output.StudentOutputSimple;
 import com.example.Ejercicio7_Validacion.POJOs.Persona;
 import com.example.Ejercicio7_Validacion.POJOs.Student;
 import com.example.Ejercicio7_Validacion.Repositorio.Estudiante_asignaturaRepository;
+import com.example.Ejercicio7_Validacion.Repositorio.ProfesorRepository;
 import com.example.Ejercicio7_Validacion.Repositorio.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,8 @@ public class EstudianteService implements InterfaceServicioEstudiante{
     StudentRepository studentRepository;
     @Autowired
     Estudiante_asignaturaRepository estudiante_asignaturaRepository;
+    @Autowired
+    ProfesorRepository profesorRepository;
 
     public PersonaOutput addPersonaService(PersonaImput persona){
         Persona p = new Persona(persona);
@@ -64,6 +67,7 @@ public class EstudianteService implements InterfaceServicioEstudiante{
             student.setBranch(studentInput.getBranch());
             student.setNum_hours_week(studentInput.getNum_hours_week());
             student.setPersona(personaRepository.findById(studentInput.getId_persona()).get());
+            student.setProfesor(profesorRepository.findById(studentInput.getId_profesor()).get());
             student.setEstudios(buscarEstudiosPorId(studentInput.getId_asignatura()));
             studentRepository.save(student);
             return ResponseEntity.ok(student);

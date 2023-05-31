@@ -30,11 +30,11 @@ public class Student {
     Persona persona;
     @NotNull
     int num_hours_week;
-    /*    @OneToOne
-        @JoinColumn(name="id_profesor")
-        Profesor profesor;*/
+    @OneToOne
+    @JoinColumn(name="id_profesor")
+    Profesor profesor;
     @ManyToMany (mappedBy = "estudiantes")
-            @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     Set<Estudiante_asignatura> estudios;
     @NotNull
     String branch;
@@ -80,6 +80,7 @@ public class Student {
         studentOutputFull.setId_string(student.getId_Student());
         studentOutputFull.setBranch(student.getBranch());
         studentOutputFull.setNum_hours_week(student.getNum_hours_week());
+        studentOutputFull.setProfesor(this.profesor.parseProfesorOutputDTO(this.profesor));
         studentOutputFull.setPersona(this.persona.parsePersonaOutputDTO(this.persona));
         studentOutputFull.setEstudios(this.ConvenrtidorEstudiante_asignatura(this.estudios));
         return studentOutputFull;

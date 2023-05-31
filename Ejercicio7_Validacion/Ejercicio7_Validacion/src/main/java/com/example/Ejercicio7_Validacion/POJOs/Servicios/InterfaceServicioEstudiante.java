@@ -14,4 +14,5 @@ public interface InterfaceServicioEstudiante {
     public Object getIdService(Integer id, String type);
     public Object setStudentService(Integer id, StudentInput studentInput);
     public Object deleteStudent(@PathVariable Integer id);
+
 }
