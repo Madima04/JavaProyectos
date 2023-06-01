@@ -23,7 +23,7 @@ public class ControladorPersona {
     InterfaceServicioEstudiante interfaceServicioEstudiante;
     @Autowired
     PersonaRepository repository;
-    @Autowired
+
     RestTemplate restTemplate;
     @PostMapping("/persona")
     public Persona getPersona(@RequestBody Persona persona) throws Exception {
@@ -43,7 +43,7 @@ public class ControladorPersona {
         if (persona.getCompany_email() != null && persona.getCompany_email().contains(persona.getName())) {
             throw new EntityNotFoundException("El email de la empresa no puede contener el nombre de usuario");
         }
-        if (persona.getPersonal_email() != null &&persona.getPersonal_email().contains(persona.getName())) {
+        if (persona.getPersonal_email() != null && persona.getPersonal_email().contains(persona.getName())) {
             throw new EntityNotFoundException("El email personal no puede contener el nombre de usuario");
         }
         if (persona.getPersonal_email().contains(persona.getCompany_email())) {
