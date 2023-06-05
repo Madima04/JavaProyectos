@@ -5,7 +5,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=contrasena
-      - POSTGRES_DATABASE=test
+      - POSTGRES_DB=test
     image: postgres
     ports:
       - "5432:5432"

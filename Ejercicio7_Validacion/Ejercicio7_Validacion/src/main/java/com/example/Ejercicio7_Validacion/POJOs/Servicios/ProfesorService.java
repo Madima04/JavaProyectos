@@ -32,6 +32,15 @@ public class ProfesorService implements InterfaceServicioProfesor{
         return p.parsePersonaOutputDTO(p);
     }
 
+    @Override
+    public ProfesorOutput getProfesorService(int id) {
+        Optional<Profesor> profesorOptional = profesorRepository.findById(id);
+        if(profesorOptional.isPresent()){
+            return profesorOptional.get().parsePersonaOutputDTO(profesorOptional.get());
+        }
+        throw new RuntimeException("No se encontro el profesor");
+    }
+
     private boolean PersonaIsStudentOrProfesor(int idPersona) {
         Optional<Persona> personaOptional = personaRepository.findById(idPersona);
         Optional<Student> studentOptional = studentRepository.findById(idPersona);

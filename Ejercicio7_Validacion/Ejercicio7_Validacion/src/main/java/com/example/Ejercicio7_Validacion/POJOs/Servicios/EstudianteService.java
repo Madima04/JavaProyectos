@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Ejercicio7_Validacion.Repositorio.PersonaRepository;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -112,6 +113,12 @@ public class EstudianteService implements InterfaceServicioEstudiante{
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @Override
+    public List<PersonaOutput> getAllPersonasService() {
+        List<Persona> personas = personaRepository.findAll();
+        return Persona.parsePersonaOutputDTO(personas);
     }
 
 }

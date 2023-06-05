@@ -3,29 +3,36 @@ package com.example.Ejercicio7_Validacion.Controladores;
 import com.example.Ejercicio7_Validacion.Excepciones.EntityNotFoundException;
 import com.example.Ejercicio7_Validacion.POJOs.Input.PersonaImput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.PersonaOutput;
+import com.example.Ejercicio7_Validacion.POJOs.Output.ProfesorOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Persona;
 import com.example.Ejercicio7_Validacion.POJOs.Servicios.InterfaceServicioEstudiante;
 import com.example.Ejercicio7_Validacion.Repositorio.PersonaRepository;
 import com.example.Ejercicio7_Validacion.Excepciones.UnprocessableEntityException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*")
 public class ControladorPersona {
 
     @Autowired
     InterfaceServicioEstudiante interfaceServicioEstudiante;
     @Autowired
     PersonaRepository repository;
-
     RestTemplate restTemplate;
-    @PostMapping("/persona")
+
+    @PostMapping("/addPersona")
     public Persona getPersona(@RequestBody Persona persona) throws Exception {
         Optional<Persona> personaOptional = Optional.ofNullable(persona);
         if (!personaOptional.isPresent()) {
@@ -93,11 +100,29 @@ public class ControladorPersona {
         return repository.findAll();
     }
 
-    @PostMapping("/addPersona")
+    @PostMapping("/addperson")
     @ResponseBody
     public PersonaOutput addPersona(@RequestBody PersonaImput persona){
         return interfaceServicioEstudiante.addPersonaService(persona);
     }
 
+    @PostMapping("/getall")
+    @ResponseBody
+    public List<PersonaOutput> getAllPersonas(){
+        return interfaceServicioEstudiante.getAllPersonasService();
+    }
+
+    @GetMapping("/getProfesor/{id}")
+    public ProfesorOutput getProfesor(@PathVariable int id) {
+        restTemplate = new RestTemplate();
+        ProfesorOutput profesor = restTemplate.getForObject("http://localhost:8080/profesor/get/" + id, ProfesorOutput.class);
+        return profesor;
+    }
+
+    @GetMapping("/getall")
+    public List<PersonaOutput> getAll() {
+        List<PersonaOutput> lista = interfaceServicioEstudiante.getAllPersonasService();
+        return lista;
+    }
 
 }

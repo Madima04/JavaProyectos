@@ -6,10 +6,7 @@ import com.example.Ejercicio7_Validacion.POJOs.Output.PersonaOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.ProfesorOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Servicios.InterfaceServicioProfesor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/profesor")
@@ -23,5 +20,8 @@ public class ControladorProfesor {
         return servicioProfesor.addProfesorService(persona);
     }
 
-
+    @GetMapping("/get/{id}")
+    public ProfesorOutput getProfesor(@PathVariable int id){
+        return servicioProfesor.getProfesorService(id);
+    }
 }

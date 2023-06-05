@@ -9,7 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -58,6 +60,27 @@ public class Persona {
         this.created_date = personaInputDTO.getCreated_date();
         this.imagen_url = personaInputDTO.getImagen_url();
         this.termination_date = personaInputDTO.getTermination_date();
+    }
+
+    public static List<PersonaOutput> parsePersonaOutputDTO(List<Persona> all) {
+        List<PersonaOutput> listpoDTO = new ArrayList<>();
+        PersonaOutput poDTO;
+        for (Persona persona : all) {
+            poDTO = new PersonaOutput();
+            poDTO.setId(persona.getId());
+            poDTO.setUsuario(persona.getUsuario());
+            poDTO.setName(persona.getName());
+            poDTO.setSurname(persona.getSurname());
+            poDTO.setCompany_email(persona.getCompany_email());
+            poDTO.setPersonal_email(persona.getPersonal_email());
+            poDTO.setCity(persona.getCity());
+            poDTO.setActive(persona.getActive());
+            poDTO.setCreated_date(persona.getCreated_date());
+            poDTO.setImagen_url(persona.getImagen_url());
+            poDTO.setTermination_date(persona.getTermination_date());
+            listpoDTO.add(poDTO);
+        }
+        return listpoDTO;
     }
 
     public PersonaOutput parsePersonaOutputDTO(Persona persona) {
