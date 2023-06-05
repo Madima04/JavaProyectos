@@ -3,6 +3,7 @@ package com.example.Ejercicio7_Validacion.Controladores;
 import com.example.Ejercicio7_Validacion.Excepciones.EntityNotFoundException;
 import com.example.Ejercicio7_Validacion.POJOs.Input.PersonaImput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.PersonaOutput;
+import com.example.Ejercicio7_Validacion.POJOs.Output.ProfesorOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Persona;
 import com.example.Ejercicio7_Validacion.POJOs.Servicios.InterfaceServicioEstudiante;
 import com.example.Ejercicio7_Validacion.Repositorio.PersonaRepository;
@@ -23,8 +24,8 @@ public class ControladorPersona {
     InterfaceServicioEstudiante interfaceServicioEstudiante;
     @Autowired
     PersonaRepository repository;
-
     RestTemplate restTemplate;
+
     @PostMapping("/persona")
     public Persona getPersona(@RequestBody Persona persona) throws Exception {
         Optional<Persona> personaOptional = Optional.ofNullable(persona);
@@ -99,5 +100,10 @@ public class ControladorPersona {
         return interfaceServicioEstudiante.addPersonaService(persona);
     }
 
-
+    @GetMapping("/getProfesor/{id}")
+    public ProfesorOutput getProfesor(@PathVariable int id) {
+        restTemplate = new RestTemplate();
+        ProfesorOutput profesor = restTemplate.getForObject("http://localhost:8080/profesor/get/" + id, ProfesorOutput.class);
+        return profesor;
+    }
 }

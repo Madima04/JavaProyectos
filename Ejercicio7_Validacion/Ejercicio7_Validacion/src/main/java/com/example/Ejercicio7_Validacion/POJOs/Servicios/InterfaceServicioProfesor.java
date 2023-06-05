@@ -10,4 +10,5 @@ public interface InterfaceServicioProfesor {
 
     public ProfesorOutput addProfesorService(ProfesorInput profesorInput);
 
+    ProfesorOutput getProfesorService(int id);
 }
