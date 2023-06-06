@@ -32,6 +32,28 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- Dependencia de JPA -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<!-- Dependencia de H2 Database (puedes reemplazarla por otra dependencia si prefieres usar una base de datos diferente) -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>dev.the-fireplace</groupId>
+			<artifactId>Erroring-Entity-Remover</artifactId>
+			<version>1.0.2+1.18</version>
+		</dependency>
 	</dependencies>
 
 	<build>
