@@ -6,9 +6,11 @@ import com.example.Ejercicio7_Validacion.POJOs.Output.PersonaOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.ProfesorOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Persona;
 import com.example.Ejercicio7_Validacion.POJOs.Servicios.InterfaceServicioEstudiante;
+import com.example.Ejercicio7_Validacion.POJOs.Servicios.InterfaceServicioPersona;
 import com.example.Ejercicio7_Validacion.Repositorio.PersonaRepository;
 import com.example.Ejercicio7_Validacion.Excepciones.UnprocessableEntityException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -26,6 +27,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @CrossOrigin(origins = "*")
 public class ControladorPersona {
 
+    @Autowired
+    InterfaceServicioPersona interfaceServicioPersona;
     @Autowired
     InterfaceServicioEstudiante interfaceServicioEstudiante;
     @Autowired
@@ -86,7 +89,7 @@ public class ControladorPersona {
     public ResponseEntity<Object> getNombre(@PathVariable String nombre) {
 
         Persona p = null;
-        for (Persona persona: repository.findAll()) {
+        for (Persona persona : repository.findAll()) {
             if (persona.getName().equals(nombre)) {
                 p = persona;
             }
@@ -102,13 +105,13 @@ public class ControladorPersona {
 
     @PostMapping("/addperson")
     @ResponseBody
-    public PersonaOutput addPersona(@RequestBody PersonaImput persona){
+    public PersonaOutput addPersona(@RequestBody PersonaImput persona) {
         return interfaceServicioEstudiante.addPersonaService(persona);
     }
 
     @PostMapping("/getall")
     @ResponseBody
-    public List<PersonaOutput> getAllPersonas(){
+    public List<PersonaOutput> getAllPersonas() {
         return interfaceServicioEstudiante.getAllPersonasService();
     }
 
@@ -125,4 +128,39 @@ public class ControladorPersona {
         return lista;
     }
 
+    @GetMapping("/getSelect")
+    public List<PersonaOutput> getSelect(@RequestParam(required = false, name = "usuario") String usuario,
+                                         @RequestParam(required = false, name = "name") String name,
+                                         @RequestParam(required = false, name = "surname") String surname,
+                                         @RequestParam(required = false, name = "created_date") @DateTimeFormat(pattern = "dd-MM-yyyy") Date created_date,
+                                         @RequestParam(required = false, name = "dateCondition") String dateCondition) {
+        HashMap<String, Object> data = new HashMap<>();
+        List<Persona> lista = new ArrayList<>();
+        List<PersonaOutput> listaOutput = new ArrayList<>();
+        if (usuario != null) {
+            data.put("usuario", usuario);
+        }
+        if (name != null) {
+            data.put("name", name);
+        }
+        if (surname != null) {
+            data.put("surname", surname);
+        }
+        if (created_date != null) {
+            if (dateCondition == "before") {
+                data.put("before", created_date);
+                if (dateCondition == "after") {
+                    data.put("after", created_date);
+                }
+                if (dateCondition == "equals") {
+                    data.put("equals", created_date);
+                }
+            }
+        }
+
+        lista = interfaceServicioPersona.getData(data);
+        listaOutput = interfaceServicioPersona.getOutput(lista);
+        return listaOutput;
+    }
 }
+
