@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.locks.Condition;
 
 @RestController
@@ -42,7 +43,7 @@ public class PersonaService implements InterfaceServicioPersona {
         return listaOutput;
     }
 
-    public List<Persona> getData(HashMap<String, Object> conditions){
+    public Map<Integer, List<Persona>> getData(HashMap<String, Object> conditions, String order){
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Persona> query = cb.createQuery(Persona.class);// Decimos con que tabla vamos a trabajar (Persona)
         Root<Persona> root = query.from(Persona.class);//Creamos la raiz
@@ -77,7 +78,27 @@ public class PersonaService implements InterfaceServicioPersona {
             }
         });
         query.select(root).where(predicates.toArray(new Predicate[predicates.size()]));//Añadimos las condiciones en forma de array de predicados
-        return em.createQuery(query).getResultList();//Ejecutamos la query
+        query.orderBy(cb.asc(root.get(order)));//Ordenamos por id
+        return divirEnPaginasDeDiez(em.createQuery(query).getResultList());
+    }
+
+    private Map<Integer, List<Persona>> divirEnPaginasDeDiez(List<Persona> lista){
+        Map<Integer, List<Persona>> mapa = new HashMap<>();
+        int i = 0;
+        int j = 0;
+        List<Persona> listaAux = new ArrayList<>();
+        for (Persona p : lista){
+            if (i == 10){
+                mapa.put(j, listaAux);
+                listaAux = new ArrayList<>();
+                i = 0;
+                j++;
+            }
+            listaAux.add(p);
+            i++;
+        }
+        mapa.put(j, listaAux);
+        return mapa;
     }
 }
 

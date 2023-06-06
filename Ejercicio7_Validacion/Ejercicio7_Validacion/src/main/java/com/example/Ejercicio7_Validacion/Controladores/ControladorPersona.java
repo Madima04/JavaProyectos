@@ -133,7 +133,10 @@ public class ControladorPersona {
                                          @RequestParam(required = false, name = "name") String name,
                                          @RequestParam(required = false, name = "surname") String surname,
                                          @RequestParam(required = false, name = "created_date") @DateTimeFormat(pattern = "dd-MM-yyyy") Date created_date,
-                                         @RequestParam(required = false, name = "dateCondition") String dateCondition) {
+                                         @RequestParam(required = false, name = "dateCondition") String dateCondition,
+                                         @RequestParam(required = false, name = "ordenadoPor") String ordenadoPor,
+                                        @RequestParam(required = false, name = "pagina") Integer pagina) {
+        Map<Integer, List<Persona>> dataPaginas = new HashMap<>();
         HashMap<String, Object> data = new HashMap<>();
         List<Persona> lista = new ArrayList<>();
         List<PersonaOutput> listaOutput = new ArrayList<>();
@@ -158,8 +161,10 @@ public class ControladorPersona {
             }
         }
 
-        lista = interfaceServicioPersona.getData(data);
-        listaOutput = interfaceServicioPersona.getOutput(lista);
+        dataPaginas = interfaceServicioPersona.getData(data, ordenadoPor);
+        dataPaginas.get(pagina).forEach(persona -> {
+            listaOutput.add(new PersonaOutput(persona));
+        });
         return listaOutput;
     }
 }
