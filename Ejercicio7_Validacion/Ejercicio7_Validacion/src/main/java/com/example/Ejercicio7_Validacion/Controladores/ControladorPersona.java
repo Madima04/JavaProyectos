@@ -136,10 +136,20 @@ public class ControladorPersona {
                                          @RequestParam(required = false, name = "dateCondition") String dateCondition,
                                          @RequestParam(required = false, name = "ordenadoPor") String ordenadoPor,
                                         @RequestParam(required = false, name = "pagina") Integer pagina) {
-        Map<Integer, List<Persona>> dataPaginas = new HashMap<>();
+        Map<Integer, List<Persona>> dataPaginas;
         HashMap<String, Object> data = new HashMap<>();
-        List<Persona> lista = new ArrayList<>();
+        List<Persona> lista;
         List<PersonaOutput> listaOutput = new ArrayList<>();
+        PersonaOutput personaOutput;
+        if (pagina == null || pagina < 0) {
+            pagina = 0;
+        }
+        if (ordenadoPor == null || ordenadoPor.length() == 0 || !ordenadoPor.equalsIgnoreCase("usuario") || !ordenadoPor.equalsIgnoreCase("name")){
+            ordenadoPor = "id";
+        }
+        if (dateCondition == null) {
+            dateCondition = "equals";
+        }
         if (usuario != null) {
             data.put("usuario", usuario);
         }
@@ -162,9 +172,20 @@ public class ControladorPersona {
         }
 
         dataPaginas = interfaceServicioPersona.getData(data, ordenadoPor);
-        dataPaginas.get(pagina).forEach(persona -> {
-            listaOutput.add(new PersonaOutput(persona));
-        });
+        lista = dataPaginas.get(pagina);
+        for (Persona persona : lista) {
+            personaOutput = new PersonaOutput();
+            personaOutput.setId(persona.getId());
+            personaOutput.setUsuario(persona.getUsuario());
+            personaOutput.setName(persona.getName());
+            personaOutput.setSurname(persona.getSurname());
+            personaOutput.setCompany_email(persona.getCompany_email());
+            personaOutput.setPersonal_email(persona.getPersonal_email());
+            personaOutput.setCity(persona.getCity());
+            personaOutput.setActive(persona.getActive());
+            personaOutput.setCreated_date(persona.getCreated_date());
+            listaOutput.add(personaOutput);
+        }
         return listaOutput;
     }
 }

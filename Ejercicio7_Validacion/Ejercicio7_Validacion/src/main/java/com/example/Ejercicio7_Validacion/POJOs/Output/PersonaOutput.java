@@ -23,4 +23,17 @@ public class PersonaOutput {
     String imagen_url;
     Date termination_date;
 
+    public PersonaOutput(Persona persona) {
+        this.id = persona.getId();
+        this.usuario = persona.getUsuario();
+        this.name = persona.getName();
+        this.surname = persona.getSurname();
+        this.company_email = persona.getCompany_email();
+        this.personal_email = persona.getPersonal_email();
+        this.city = persona.getCity();
+        this.active = persona.getActive();
+        this.created_date = persona.getCreated_date();
+        this.imagen_url = persona.getImagen_url();
+        this.termination_date = persona.getTermination_date();
+    }
 }
