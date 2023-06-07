@@ -1,5 +1,6 @@
 package com.example.Ejercicio7_Validacion.POJOs.Input;
 
+import com.example.Ejercicio7_Validacion.POJOs.Persona;
 import lombok.Data;
 
 import java.util.Date;
@@ -18,6 +19,7 @@ public class PersonaImput {
     Date created_date;
     String imagen_url;
     Date termination_date;
-
-
+    public Persona parsePersona(PersonaImput persona) {
+        return new Persona(persona);
+    }
 }

@@ -14,4 +14,6 @@ public interface InterfaceServicioPersona {
     public PersonaOutput addPersonaService(PersonaImput persona);
 
     List<PersonaOutput> getOutput(List<Persona> lista);
+
+    void addPersona(PersonaImput persona);
 }

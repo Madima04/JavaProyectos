@@ -109,6 +109,12 @@ public class ControladorPersona {
         return interfaceServicioEstudiante.addPersonaService(persona);
     }
 
+    @PostMapping("/addperson2")
+    @ResponseBody
+    public PersonaOutput addPersona2(@RequestBody Persona persona) {
+        return interfaceServicioEstudiante.addPersonaService2(persona);
+    }
+
     @PostMapping("/getall")
     @ResponseBody
     public List<PersonaOutput> getAllPersonas() {
@@ -187,6 +193,10 @@ public class ControladorPersona {
             listaOutput.add(personaOutput);
         }
         return listaOutput;
+    }
+
+    public void setInterfaceServicioPersona(InterfaceServicioPersona interfaceServicioPersona) {
+        this.interfaceServicioPersona = interfaceServicioPersona;
     }
 }
 

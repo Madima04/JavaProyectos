@@ -43,6 +43,12 @@ public class PersonaService implements InterfaceServicioPersona {
         return listaOutput;
     }
 
+    @Override
+    public void addPersona(PersonaImput persona) {
+        Persona p = new Persona(persona);
+        personaRepository.save(p);
+    }
+
     public Map<Integer, List<Persona>> getData(HashMap<String, Object> conditions, String order){
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Persona> query = cb.createQuery(Persona.class);// Decimos con que tabla vamos a trabajar (Persona)

@@ -40,6 +40,12 @@ public class EstudianteService implements InterfaceServicioEstudiante{
         return p.parsePersonaOutputDTO(p);
     }
 
+    @Override
+    public PersonaOutput addPersonaService(Persona persona) {
+        personaRepository.save(persona);
+        return persona.parsePersonaOutputDTO(persona);
+    }
+
     public StudentOutputSimple addStudentService( StudentInput student) throws Exception {
         if(PersonaIsStudentOrProfesor(student.getId_persona())){
             throw new Exception("La persona ya es un estudiante o profesor");
@@ -119,6 +125,12 @@ public class EstudianteService implements InterfaceServicioEstudiante{
     public List<PersonaOutput> getAllPersonasService() {
         List<Persona> personas = personaRepository.findAll();
         return Persona.parsePersonaOutputDTO(personas);
+    }
+
+    @Override
+    public PersonaOutput addPersonaService2(Persona persona) {
+        personaRepository.save(persona);
+        return persona.parsePersonaOutputDTO(persona);
     }
 
 }
