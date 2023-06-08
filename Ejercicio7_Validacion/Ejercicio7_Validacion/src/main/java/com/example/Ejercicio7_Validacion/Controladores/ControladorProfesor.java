@@ -1,10 +1,8 @@
 package com.example.Ejercicio7_Validacion.Controladores;
 
-import com.example.Ejercicio7_Validacion.POJOs.Input.PersonaImput;
 import com.example.Ejercicio7_Validacion.POJOs.Input.ProfesorInput;
-import com.example.Ejercicio7_Validacion.POJOs.Output.PersonaOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.ProfesorOutput;
-import com.example.Ejercicio7_Validacion.POJOs.Servicios.InterfaceServicioProfesor;
+import com.example.Ejercicio7_Validacion.POJOs.ServiciosClases.InterfaceServicioProfesor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

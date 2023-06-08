@@ -12,4 +12,8 @@ public class ProfesorOutput {
     public Integer setId_string(Integer idProfesor) {
         return id_profesor;
     }
+
+    public void setId(int i) {
+        this.id_profesor = i;
+    }
 }

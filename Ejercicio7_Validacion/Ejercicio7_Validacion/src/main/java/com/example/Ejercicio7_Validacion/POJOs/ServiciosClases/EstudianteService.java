@@ -1,4 +1,4 @@
-package com.example.Ejercicio7_Validacion.POJOs.Servicios;
+package com.example.Ejercicio7_Validacion.POJOs.ServiciosClases;
 
 import com.example.Ejercicio7_Validacion.POJOs.Estudiante_asignatura;
 import com.example.Ejercicio7_Validacion.POJOs.Input.PersonaImput;
@@ -8,14 +8,14 @@ import com.example.Ejercicio7_Validacion.POJOs.Output.StudentOutputSimple;
 import com.example.Ejercicio7_Validacion.POJOs.Persona;
 import com.example.Ejercicio7_Validacion.POJOs.Profesor;
 import com.example.Ejercicio7_Validacion.POJOs.Student;
-import com.example.Ejercicio7_Validacion.Repositorio.Estudiante_asignaturaRepository;
-import com.example.Ejercicio7_Validacion.Repositorio.ProfesorRepository;
-import com.example.Ejercicio7_Validacion.Repositorio.StudentRepository;
+import com.example.Ejercicio7_Validacion.RepositorioClases.Estudiante_asignaturaRepository;
+import com.example.Ejercicio7_Validacion.RepositorioClases.ProfesorRepository;
+import com.example.Ejercicio7_Validacion.RepositorioClases.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.Ejercicio7_Validacion.Repositorio.PersonaRepository;
+import com.example.Ejercicio7_Validacion.RepositorioClases.PersonaRepository;
 
 import java.util.HashSet;
 import java.util.List;

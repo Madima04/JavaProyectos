@@ -1,11 +1,10 @@
 package com.example.Ejercicio7_Validacion.POJOs;
 
 import com.example.Ejercicio7_Validacion.POJOs.Input.ProfesorInput;
-import com.example.Ejercicio7_Validacion.POJOs.Output.PersonaOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.ProfesorOutput;
-import com.example.Ejercicio7_Validacion.Repositorio.PersonaRepository;
+import com.example.Ejercicio7_Validacion.RepositorioClases.PersonaRepository;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import org.antlr.v4.runtime.misc.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,6 +36,7 @@ public class Profesor {
         this.branch = profesorInput.getBranch();
     }
 
+
     public ProfesorOutput parsePersonaOutputDTO(Profesor p) {
         ProfesorOutput profesorOutput = new ProfesorOutput();
         profesorOutput.setId_profesor(p.getId_profesor());
@@ -51,5 +51,9 @@ public class Profesor {
         profesorOutput.setPersona(this.persona.parsePersonaOutputDTO(this.persona));
         profesorOutput.setBranch(profesor.getBranch());
         return profesorOutput;
+    }
+
+    public void setId_persona(Integer idPersona) {
+        this.persona.setId_persona(idPersona);
     }
 }

@@ -1,9 +1,9 @@
-package com.example.Ejercicio7_Validacion.POJOs.Servicios;
+package com.example.Ejercicio7_Validacion.POJOs.ServiciosClases;
 
 import com.example.Ejercicio7_Validacion.POJOs.Input.PersonaImput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.PersonaOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Persona;
-import com.example.Ejercicio7_Validacion.Repositorio.PersonaRepository;
+import com.example.Ejercicio7_Validacion.RepositorioClases.PersonaRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.locks.Condition;
 
 @RestController
 public class PersonaService implements InterfaceServicioPersona {
@@ -105,6 +104,10 @@ public class PersonaService implements InterfaceServicioPersona {
         }
         mapa.put(j, listaAux);
         return mapa;
+    }
+
+    public void setEm(EntityManager em) {
+        this.em = em;
     }
 }
 

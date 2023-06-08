@@ -3,12 +3,12 @@ package com.example.Ejercicio7_Validacion.POJOs;
 import com.example.Ejercicio7_Validacion.POJOs.Input.PersonaImput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.PersonaOutput;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import org.antlr.v4.runtime.misc.NotNull;
+import org.hibernate.validator.constraints.Length;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +24,7 @@ public class Persona {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_persona")
     Integer id;
-    @Size(min = 6, max = 10, message = "El nombre debe contener entre 6 y 10 caracteres")
+    @Length(min = 6, max = 10, message = "El nombre debe contener entre 6 y 10 caracteres")
     @NotNull
     String usuario;
     @NotNull
@@ -40,6 +40,8 @@ public class Persona {
     String city;
     @NotNull
     Boolean active;
+    @NotNull
+    Boolean admin;
     @NotNull
     Date created_date;
     String imagen_url;
@@ -60,6 +62,7 @@ public class Persona {
         this.created_date = personaInputDTO.getCreated_date();
         this.imagen_url = personaInputDTO.getImagen_url();
         this.termination_date = personaInputDTO.getTermination_date();
+        this.admin = personaInputDTO.getAdmin();
     }
 
     public static List<PersonaOutput> parsePersonaOutputDTO(List<Persona> all) {
@@ -78,6 +81,7 @@ public class Persona {
             poDTO.setCreated_date(persona.getCreated_date());
             poDTO.setImagen_url(persona.getImagen_url());
             poDTO.setTermination_date(persona.getTermination_date());
+            poDTO.setAdmin(persona.getAdmin());
             listpoDTO.add(poDTO);
         }
         return listpoDTO;
@@ -96,7 +100,11 @@ public class Persona {
         poDTO.setCreated_date(persona.getCreated_date());
         poDTO.setImagen_url(persona.getImagen_url());
         poDTO.setTermination_date(persona.getTermination_date());
+        poDTO.setAdmin(persona.getAdmin());
         return poDTO;
     }
 
+    public void setId_persona(Integer idPersona) {
+        this.id = idPersona;
+    }
 }

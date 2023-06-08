@@ -1,26 +1,21 @@
 package com.example.Ejercicio7_Validacion.Controladores;
 
+
 import com.example.Ejercicio7_Validacion.Excepciones.EntityNotFoundException;
+import com.example.Ejercicio7_Validacion.Excepciones.UnprocessableEntityException;
 import com.example.Ejercicio7_Validacion.POJOs.Input.PersonaImput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.PersonaOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.ProfesorOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Persona;
-import com.example.Ejercicio7_Validacion.POJOs.Servicios.InterfaceServicioEstudiante;
-import com.example.Ejercicio7_Validacion.POJOs.Servicios.InterfaceServicioPersona;
-import com.example.Ejercicio7_Validacion.Repositorio.PersonaRepository;
-import com.example.Ejercicio7_Validacion.Excepciones.UnprocessableEntityException;
+import com.example.Ejercicio7_Validacion.POJOs.ServiciosClases.InterfaceServicioEstudiante;
+import com.example.Ejercicio7_Validacion.POJOs.ServiciosClases.InterfaceServicioPersona;
+import com.example.Ejercicio7_Validacion.RepositorioClases.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.multipart.MultipartFile;
-
-
 import java.util.*;
-
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping("/api")
@@ -36,7 +31,7 @@ public class ControladorPersona {
     RestTemplate restTemplate;
 
     @PostMapping("/addPersona")
-    public Persona getPersona(@RequestBody Persona persona) throws Exception {
+    public PersonaOutput getPersona(@RequestBody Persona persona) throws Exception {
         Optional<Persona> personaOptional = Optional.ofNullable(persona);
         if (!personaOptional.isPresent()) {
             throw new EntityNotFoundException("Usuario no puede ser nulo");
@@ -68,7 +63,8 @@ public class ControladorPersona {
         if (persona.getCreated_date() == null) {
             throw new EntityNotFoundException("El campo created_date no puede ser nulo");
         }
-        return repository.save(persona);
+        repository.save(persona);
+        return new PersonaOutput(persona);
     }
 
     @GetMapping("/id/{id}")

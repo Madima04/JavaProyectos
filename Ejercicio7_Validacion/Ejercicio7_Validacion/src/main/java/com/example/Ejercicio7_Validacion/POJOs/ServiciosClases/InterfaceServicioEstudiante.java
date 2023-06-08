@@ -1,4 +1,4 @@
-package com.example.Ejercicio7_Validacion.POJOs.Servicios;
+package com.example.Ejercicio7_Validacion.POJOs.ServiciosClases;
 
 import com.example.Ejercicio7_Validacion.POJOs.Input.PersonaImput;
 import com.example.Ejercicio7_Validacion.POJOs.Input.StudentInput;
@@ -8,7 +8,6 @@ import com.example.Ejercicio7_Validacion.POJOs.Persona;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-import java.util.Set;
 
 public interface InterfaceServicioEstudiante {
     public PersonaOutput addPersonaService(PersonaImput persona);

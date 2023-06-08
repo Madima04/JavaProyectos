@@ -2,12 +2,9 @@ package com.example.Ejercicio7_Validacion.Controladores;
 
 import com.example.Ejercicio7_Validacion.POJOs.Output.*;
 import com.example.Ejercicio7_Validacion.POJOs.Input.*;
-import com.example.Ejercicio7_Validacion.POJOs.Servicios.InterfaceServicioEstudiante;
+import com.example.Ejercicio7_Validacion.POJOs.ServiciosClases.InterfaceServicioEstudiante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/escuela")

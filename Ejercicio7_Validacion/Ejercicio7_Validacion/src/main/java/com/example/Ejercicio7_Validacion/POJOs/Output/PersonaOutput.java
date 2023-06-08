@@ -19,6 +19,7 @@ public class PersonaOutput {
     String personal_email;
     String city;
     Boolean active;
+    Boolean admin;
     Date created_date;
     String imagen_url;
     Date termination_date;

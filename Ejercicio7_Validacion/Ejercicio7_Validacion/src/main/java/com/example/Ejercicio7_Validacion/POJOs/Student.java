@@ -4,12 +4,12 @@ import com.example.Ejercicio7_Validacion.POJOs.Input.StudentInput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.Estudiante_asignaturaOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.StudentOutputFull;
 import com.example.Ejercicio7_Validacion.POJOs.Output.StudentOutputSimple;
-import com.example.Ejercicio7_Validacion.Repositorio.Estudiante_asignaturaRepository;
-import com.example.Ejercicio7_Validacion.Repositorio.PersonaRepository;
+import com.example.Ejercicio7_Validacion.RepositorioClases.Estudiante_asignaturaRepository;
+import com.example.Ejercicio7_Validacion.RepositorioClases.PersonaRepository;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.Cascade;
 
 import java.util.HashSet;

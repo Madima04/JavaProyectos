@@ -1,4 +1,4 @@
-package com.example.Ejercicio7_Validacion.POJOs.Servicios;
+package com.example.Ejercicio7_Validacion.POJOs.ServiciosClases;
 
 import com.example.Ejercicio7_Validacion.POJOs.Input.Estudiante_asignaturaInput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.Estudiante_asignaturaOutput;

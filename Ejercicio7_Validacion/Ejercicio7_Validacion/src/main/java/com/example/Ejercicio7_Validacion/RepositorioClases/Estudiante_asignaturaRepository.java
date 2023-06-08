@@ -1,4 +1,4 @@
-package com.example.Ejercicio7_Validacion.Repositorio;
+package com.example.Ejercicio7_Validacion.RepositorioClases;
 
 import com.example.Ejercicio7_Validacion.POJOs.Estudiante_asignatura;
 import org.springframework.data.jpa.repository.JpaRepository;

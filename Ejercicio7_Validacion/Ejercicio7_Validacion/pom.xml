@@ -14,7 +14,7 @@
     <name>Ejercicio7_Validacion</name>
     <description>Ejercicio 7 CRUD de Validacion</description>
     <properties>
-        <java.version>20</java.version>
+        <java.version>17</java.version>
         <spring-cloud.version>2022.0.3</spring-cloud.version>
     </properties>
     <dependencies>
@@ -46,8 +46,25 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>5.3.27</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.2.0.Final</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     <dependencyManagement>

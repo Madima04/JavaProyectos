@@ -1,13 +1,13 @@
-package com.example.Ejercicio7_Validacion.POJOs.Servicios;
+package com.example.Ejercicio7_Validacion.POJOs.ServiciosClases;
 
 import com.example.Ejercicio7_Validacion.POJOs.Input.ProfesorInput;
 import com.example.Ejercicio7_Validacion.POJOs.Output.ProfesorOutput;
 import com.example.Ejercicio7_Validacion.POJOs.Persona;
 import com.example.Ejercicio7_Validacion.POJOs.Profesor;
 import com.example.Ejercicio7_Validacion.POJOs.Student;
-import com.example.Ejercicio7_Validacion.Repositorio.PersonaRepository;
-import com.example.Ejercicio7_Validacion.Repositorio.ProfesorRepository;
-import com.example.Ejercicio7_Validacion.Repositorio.StudentRepository;
+import com.example.Ejercicio7_Validacion.RepositorioClases.PersonaRepository;
+import com.example.Ejercicio7_Validacion.RepositorioClases.ProfesorRepository;
+import com.example.Ejercicio7_Validacion.RepositorioClases.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
