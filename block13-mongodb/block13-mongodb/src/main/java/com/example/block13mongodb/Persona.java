@@ -1,52 +1,41 @@
-package com.example.Ejercicio7_Validacion.POJOs;
+package com.example.block13mongodb;
 
-import com.example.Ejercicio7_Validacion.POJOs.Input.PersonaImput;
-import com.example.Ejercicio7_Validacion.POJOs.Output.PersonaOutput;
-import jakarta.persistence.*;
-
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.antlr.v4.runtime.misc.NotNull;
-import org.hibernate.validator.constraints.Length;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.MongoTemplate;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "persona")
 public class Persona {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_persona")
-    Integer id;
-    @Length(min = 6, max = 10, message = "El nombre debe contener entre 6 y 10 caracteres")
-    @NotNull
-    String usuario;
-    @NotNull
-    String password;
-    @NotNull
-    String name;
-    String surname;
-    @NotNull
-    String company_email;
-    @NotNull
-    String personal_email;
-    @NotNull
-    String city;
-    @NotNull
-    Boolean active;
-    @NotNull
-    Boolean admin;
-    @NotNull
-    Date created_date;
-    String imagen_url;
-    Date termination_date;
-    public Persona(int id){
+    private String id;
+    private String usuario;
+    private String password;
+    private String name;
+    private String surname;
+    private String company_email;
+    private String personal_email;
+    private String city;
+    private Boolean active;
+    private Date created_date;
+    private String imagen_url;
+    private Date termination_date;
+    public Persona(String id){
         this.id = id;
     }
 
@@ -62,7 +51,6 @@ public class Persona {
         this.created_date = personaInputDTO.getCreated_date();
         this.imagen_url = personaInputDTO.getImagen_url();
         this.termination_date = personaInputDTO.getTermination_date();
-        this.admin = personaInputDTO.getAdmin();
     }
 
     public static List<PersonaOutput> parsePersonaOutputDTO(List<Persona> all) {
@@ -81,7 +69,6 @@ public class Persona {
             poDTO.setCreated_date(persona.getCreated_date());
             poDTO.setImagen_url(persona.getImagen_url());
             poDTO.setTermination_date(persona.getTermination_date());
-            poDTO.setAdmin(persona.getAdmin());
             listpoDTO.add(poDTO);
         }
         return listpoDTO;
@@ -100,14 +87,6 @@ public class Persona {
         poDTO.setCreated_date(persona.getCreated_date());
         poDTO.setImagen_url(persona.getImagen_url());
         poDTO.setTermination_date(persona.getTermination_date());
-        poDTO.setAdmin(persona.getAdmin());
         return poDTO;
-    }
-
-    public void setId_persona(Integer idPersona) {
-        this.id = idPersona;
-    }
-
-    public void setNombre(String nombre) {
     }
 }
