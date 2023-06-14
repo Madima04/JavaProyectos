@@ -18,6 +18,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 
@@ -43,7 +45,6 @@ class ProfesorServiceTest {
         ProfesorInput profesorInput = crearProfesorImput();
         Profesor profesor = crearProfesor(profesorInput);
         ProfesorOutput profesorOutput = ProfesorOutput(profesor);
-        profesorOutput.setId(1);
         Mockito.when(profesorRepository.save(any())).thenReturn(profesor);
         ProfesorOutput profesorOutput1 = this.profesorService.addProfesorService(profesorInput);
         profesorOutput1.setId(1);
@@ -126,6 +127,20 @@ class ProfesorServiceTest {
 
     private ProfesorOutput ProfesorOutput(Profesor profesor) {
         return profesor.parseProfesorOutputDTO(profesor);
+    }
+    private Persona crearPersona(){
+        Persona persona = new Persona();
+        persona.setId(1);
+        persona.setUsuario("john");
+        persona.setName("John Doe");
+        persona.setPersonal_email("ejemplo@adasdas");
+        persona.setCompany_email("dasdasd@jytjy");
+        persona.setCity("Buenos Aires");
+        persona.setSurname("Doe");
+        persona.setImagen_url("https://www.google.com");
+        persona.setActive(true);
+        persona.setCreated_date(new Date());
+        return persona;
     }
 }
 
