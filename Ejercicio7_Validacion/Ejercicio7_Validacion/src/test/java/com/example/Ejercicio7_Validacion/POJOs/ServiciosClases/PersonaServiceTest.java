@@ -120,7 +120,7 @@ class PersonaServiceTest {
         persona.setImagen_url("https://www.google.com");
         persona.setActive(true);
         persona.setCreated_date(new Date());
-        return persona;
+        return persona; //retun de persona
     }
 
     private PersonaOutput crearPersonaOutput(){
